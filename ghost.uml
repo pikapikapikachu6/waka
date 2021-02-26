@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ghost</OriginalElement>
+  <nodes>
+    <node x="425.3860851284961" y="3240.0">ghost.GhostTest</node>
+    <node x="961.95796957672" y="1041.0">ghost.ConfigProcessing</node>
+    <node x="762.8376204648532" y="373.5">ghost.Direction</node>
+    <node x="958.4425595238095" y="1681.0">ghost.ConfigProcessingTest</node>
+    <node x="332.1999999999998" y="1041.0">ghost.Ghost_type</node>
+    <node x="1814.4334537981863" y="373.5">ghost.PointTest</node>
+    <node x="415.27499999999986" y="1531.0">ghost.Ghost</node>
+    <node x="1412.315754913077" y="0.0">ghost.Point</node>
+    <node x="64.97499999999968" y="1807.5">ghost.ModesTest</node>
+    <node x="114.27880291005329" y="408.0">ghost.M_TYPE</node>
+    <node x="1287.392559523809" y="2385.0">ghost.App</node>
+    <node x="1688.9268589380197" y="3320.5">ghost.MapGridTest</node>
+    <node x="1194.8625543272876" y="845.0">ghost.Waka</node>
+    <node x="1476.9268589380197" y="3309.0">ghost.WakaTest</node>
+    <node x="1448.815754913077" y="246.0">ghost.MapGrid</node>
+    <node x="1280.9268589380197" y="3343.5">ghost.AppTest</node>
+    <node x="139.19999999999982" y="1075.5">ghost.Modes</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ghost.GhostTest" target="ghost.MapGrid">
+      <point x="94.52500000000009" y="-304.0" />
+      <point x="619.4110851284962" y="3170.0" />
+      <point x="1656.0526124338628" y="3170.0" />
+      <point x="1656.0526124338628" y="775.0" />
+      <point x="1597.2824215797436" y="775.0" />
+      <point x="17.466666666666697" y="224.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.M_TYPE">
+      <point x="-42.1875" y="-362.0" />
+      <point x="598.0874999999999" y="1491.0" />
+      <point x="640.2393400415735" y="1491.0" />
+      <point x="640.2393400415735" y="825.0" />
+      <point x="281.6788029100534" y="825.0" />
+      <point x="74.40000000000009" y="62.5" />
+    </edge>
+    <edge source="ghost.Waka" target="ghost.App">
+      <point x="88.5" y="293.0" />
+      <point x="1460.3625543272876" y="1511.0" />
+      <point x="1459.3526124338628" y="1511.0" />
+      <point x="1459.3526124338628" y="2305.0" />
+      <point x="1412.080059523809" y="2305.0" />
+      <point x="19.6875" y="-327.5" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Waka">
+      <point x="54.72499999999991" y="-304.0" />
+      <point x="579.611085128496" y="3130.0" />
+      <point x="1254.892559523809" y="3130.0" />
+      <point x="1254.892559523809" y="1491.0" />
+      <point x="1283.3625543272876" y="1491.0" />
+      <point x="-88.5" y="293.0" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.Modes">
+      <point x="-210.9375" y="-362.0" />
+      <point x="429.33749999999986" y="1501.0" />
+      <point x="236.51249999999982" y="1501.0" />
+      <point x="10.8125" y="62.5" />
+    </edge>
+    <edge source="ghost.AppTest" target="ghost.Waka">
+      <point x="-75.42857142857144" y="-200.5" />
+      <point x="1293.4982875094483" y="3130.0" />
+      <point x="1265.892559523809" y="3130.0" />
+      <point x="1265.892559523809" y="1501.0" />
+      <point x="1318.7625543272877" y="1501.0" />
+      <point x="-53.10000000000002" y="293.0" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Point">
+      <point x="-94.52499999999986" y="-304.0" />
+      <point x="430.36108512849626" y="3220.0" />
+      <point x="25.0" y="3220.0" />
+      <point x="25.0" y="146.0" />
+      <point x="1417.9824215797437" y="146.0" />
+      <point x="-96.33333333333337" y="63.0" />
+    </edge>
+    <edge source="ghost.App" target="ghost.ConfigProcessing">
+      <point x="-19.6875" y="-327.5" />
+      <point x="1372.705059523809" y="2285.0" />
+      <point x="1233.9425595238092" y="2285.0" />
+      <point x="1233.9425595238092" y="1471.0" />
+      <point x="1125.3865410052915" y="1471.0" />
+      <point x="75.42857142857156" y="97.0" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Ghost">
+      <point x="-14.924999999999955" y="-304.0" />
+      <point x="509.96108512849617" y="2355.0" />
+      <point x="499.64999999999986" y="2355.0" />
+      <point x="-140.625" y="362.0" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.Point">
+      <point x="42.1875" y="-362.0" />
+      <point x="682.4624999999999" y="1491.0" />
+      <point x="729.3782549130772" y="1491.0" />
+      <point x="729.3782549130772" y="186.0" />
+      <point x="1463.315754913077" y="186.0" />
+      <point x="-51.0" y="63.0" />
+    </edge>
+    <edge source="ghost.MapGridTest" target="ghost.MapGrid">
+      <point x="0.0" y="-223.5" />
+      <point x="1796.9268589380197" y="3210.0" />
+      <point x="1755.8167871315197" y="3210.0" />
+      <point x="1755.8167871315197" y="725.0" />
+      <point x="1684.6157549130771" y="725.0" />
+      <point x="104.79999999999995" y="224.5" />
+    </edge>
+    <edge source="ghost.WakaTest" target="ghost.Point">
+      <point x="84.0" y="-235.0" />
+      <point x="1656.9268589380197" y="3220.0" />
+      <point x="1982.9334537981863" y="3220.0" />
+      <point x="1982.9334537981863" y="146.0" />
+      <point x="1610.6490882464104" y="146.0" />
+      <point x="96.33333333333337" y="63.0" />
+    </edge>
+    <edge source="ghost.WakaTest" target="ghost.App">
+      <point x="-60.0" y="-235.0" />
+      <point x="1512.9268589380197" y="3080.0" />
+      <point x="1431.767559523809" y="3080.0" />
+      <point x="39.375" y="327.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.App">
+      <point x="196.875" y="362.0" />
+      <point x="837.1499999999999" y="2305.0" />
+      <point x="1346.455059523809" y="2305.0" />
+      <point x="-45.9375" y="-327.5" />
+    </edge>
+    <edge source="ghost.App" target="ghost.Waka">
+      <point x="-6.5625" y="-327.5" />
+      <point x="1385.830059523809" y="2275.0" />
+      <point x="1376.5518589380197" y="2275.0" />
+      <point x="1376.5518589380197" y="1511.0" />
+      <point x="1389.5625543272877" y="1511.0" />
+      <point x="17.700000000000045" y="293.0" />
+    </edge>
+    <edge source="ghost.ModesTest" target="ghost.Modes">
+      <point x="0.0" y="-85.5" />
+      <point x="136.47499999999968" y="1511.0" />
+      <point x="150.01249999999982" y="1511.0" />
+      <point x="-75.6875" y="62.5" />
+    </edge>
+    <edge source="ghost.AppTest" target="ghost.MapGrid">
+      <point x="50.28571428571422" y="-200.5" />
+      <point x="1419.212573223734" y="3180.0" />
+      <point x="1694.9018589380198" y="3180.0" />
+      <point x="1694.9018589380198" y="765.0" />
+      <point x="1614.7490882464103" y="765.0" />
+      <point x="34.933333333333394" y="224.5" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.App">
+      <point x="64.67499999999995" y="-304.0" />
+      <point x="589.5610851284961" y="3140.0" />
+      <point x="1300.517559523809" y="3140.0" />
+      <point x="-91.875" y="327.5" />
+    </edge>
+    <edge source="ghost.ModesTest" target="ghost.M_TYPE">
+      <point x="-47.66666666666674" y="-85.5" />
+      <point x="88.80833333333294" y="1511.0" />
+      <point x="91.01733512849592" y="1511.0" />
+      <point x="91.01733512849592" y="825.0" />
+      <point x="170.07880291005324" y="825.0" />
+      <point x="-37.200000000000045" y="62.5" />
+    </edge>
+    <edge source="ghost.PointTest" target="ghost.Point">
+      <point x="-39.5" y="-97.0" />
+      <point x="1853.9334537981863" y="166.0" />
+      <point x="1587.9824215797437" y="166.0" />
+      <point x="73.66666666666663" y="63.0" />
+    </edge>
+    <edge source="ghost.ConfigProcessingTest" target="ghost.ConfigProcessing">
+      <point x="-63.5" y="-212.0" />
+      <point x="1021.9425595238095" y="1491.0" />
+      <point x="1049.95796957672" y="1491.0" />
+      <point x="0.0" y="97.0" />
+    </edge>
+    <edge source="ghost.Waka" target="ghost.Point">
+      <point x="0.0" y="-293.0" />
+      <point x="1371.8625543272876" y="795.0" />
+      <point x="1335.415754913077" y="795.0" />
+      <point x="1335.415754913077" y="206.0" />
+      <point x="1485.9824215797437" y="206.0" />
+      <point x="-28.333333333333314" y="63.0" />
+    </edge>
+    <edge source="ghost.AppTest" target="ghost.App">
+      <point x="-25.142857142857224" y="-200.5" />
+      <point x="1343.7840017951626" y="3150.0" />
+      <point x="1353.017559523809" y="3150.0" />
+      <point x="-39.375" y="327.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.Direction">
+      <point x="70.3125" y="-362.0" />
+      <point x="710.5874999999999" y="1501.0" />
+      <point x="740.3782549130772" y="1501.0" />
+      <point x="740.3782549130772" y="785.0" />
+      <point x="779.00428713152" y="785.0" />
+      <point x="-80.83333333333326" y="97.0" />
+    </edge>
+    <edge source="ghost.WakaTest" target="ghost.Waka">
+      <point x="-12.0" y="-235.0" />
+      <point x="1560.9268589380197" y="3150.0" />
+      <point x="1552.6625543272876" y="3150.0" />
+      <point x="1552.6625543272876" y="1511.0" />
+      <point x="1495.7625543272875" y="1511.0" />
+      <point x="123.89999999999986" y="293.0" />
+    </edge>
+    <edge source="ghost.Modes" target="ghost.M_TYPE">
+      <point x="-43.25" y="-62.5" />
+      <point x="182.44999999999982" y="825.0" />
+      <point x="207.2788029100533" y="825.0" />
+      <point x="0.0" y="62.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.ConfigProcessing">
+      <point x="154.6875" y="-362.0" />
+      <point x="794.9624999999999" y="1461.0" />
+      <point x="974.5293981481486" y="1461.0" />
+      <point x="-75.42857142857133" y="97.0" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.Waka">
+      <point x="210.9375" y="-362.0" />
+      <point x="851.2124999999999" y="1511.0" />
+      <point x="1212.5625543272877" y="1511.0" />
+      <point x="-159.29999999999995" y="293.0" />
+    </edge>
+    <edge source="ghost.Waka" target="ghost.MapGrid">
+      <point x="101.14285714285711" y="-293.0" />
+      <point x="1473.0054114701447" y="825.0" />
+      <point x="1492.4824215797437" y="825.0" />
+      <point x="-87.33333333333331" y="224.5" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Direction">
+      <point x="14.924999999999955" y="-304.0" />
+      <point x="539.8110851284961" y="3090.0" />
+      <point x="895.6104166666664" y="3090.0" />
+      <point x="895.6104166666664" y="795.0" />
+      <point x="843.6709537981865" y="795.0" />
+      <point x="-16.166666666666742" y="97.0" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.ConfigProcessing">
+      <point x="24.875" y="-304.0" />
+      <point x="549.7610851284961" y="3100.0" />
+      <point x="937.9925595238094" y="3100.0" />
+      <point x="937.9925595238094" y="1471.0" />
+      <point x="999.6722552910057" y="1471.0" />
+      <point x="-50.28571428571422" y="97.0" />
+    </edge>
+    <edge source="ghost.MapGrid" target="ghost.App">
+      <point x="-17.466666666666697" y="224.5" />
+      <point x="1562.3490882464102" y="795.0" />
+      <point x="1635.1026124338628" y="795.0" />
+      <point x="1635.1026124338628" y="2335.0" />
+      <point x="1451.455059523809" y="2335.0" />
+      <point x="59.0625" y="-327.5" />
+    </edge>
+    <edge source="ghost.App" target="ghost.Point">
+      <point x="98.4375" y="-327.5" />
+      <point x="1490.830059523809" y="2365.0" />
+      <point x="1803.9334537981863" y="2365.0" />
+      <point x="1803.9334537981863" y="176.0" />
+      <point x="1576.6490882464104" y="176.0" />
+      <point x="62.33333333333337" y="63.0" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Modes">
+      <point x="-64.67499999999995" y="-304.0" />
+      <point x="460.21108512849617" y="3190.0" />
+      <point x="218.47499999999968" y="3190.0" />
+      <point x="218.47499999999968" y="1511.0" />
+      <point x="193.26249999999982" y="1511.0" />
+      <point x="-32.4375" y="62.5" />
+    </edge>
+    <edge source="ghost.App" target="ghost.Ghost">
+      <point x="-85.3125" y="-327.5" />
+      <point x="1307.080059523809" y="2335.0" />
+      <point x="668.3999999999999" y="2335.0" />
+      <point x="28.125" y="362.0" />
+    </edge>
+    <edge source="ghost.MapGrid" target="ghost.Point">
+      <point x="-98.25" y="-224.5" />
+      <point x="1481.565754913077" y="226.0" />
+      <point x="1508.6490882464104" y="226.0" />
+      <point x="-5.666666666666629" y="63.0" />
+    </edge>
+    <edge source="ghost.WakaTest" target="ghost.Direction">
+      <point x="-84.0" y="-235.0" />
+      <point x="1488.9268589380197" y="3090.0" />
+      <point x="906.6104166666664" y="3090.0" />
+      <point x="906.6104166666664" y="785.0" />
+      <point x="876.00428713152" y="785.0" />
+      <point x="16.166666666666742" y="97.0" />
+    </edge>
+    <edge source="ghost.App" target="ghost.Ghost_type">
+      <point x="-98.4375" y="-327.5" />
+      <point x="1293.955059523809" y="2345.0" />
+      <point x="404.77499999999986" y="2345.0" />
+      <point x="404.77499999999986" y="1511.0" />
+      <point x="435.6999999999998" y="1511.0" />
+      <point x="0.0" y="97.0" />
+    </edge>
+    <edge source="ghost.App" target="ghost.MapGrid">
+      <point x="45.9375" y="-327.5" />
+      <point x="1438.330059523809" y="2325.0" />
+      <point x="1624.1026124338628" y="2325.0" />
+      <point x="1624.1026124338628" y="805.0" />
+      <point x="1544.8824215797438" y="805.0" />
+      <point x="-34.93333333333328" y="224.5" />
+    </edge>
+    <edge source="ghost.WakaTest" target="ghost.MapGrid">
+      <point x="60.0" y="-235.0" />
+      <point x="1632.9268589380197" y="3210.0" />
+      <point x="1727.9018589380198" y="3210.0" />
+      <point x="1727.9018589380198" y="735.0" />
+      <point x="1667.1490882464104" y="735.0" />
+      <point x="87.33333333333337" y="224.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.MapGrid">
+      <point x="182.8125" y="-362.0" />
+      <point x="823.0874999999999" y="1501.0" />
+      <point x="1148.45796957672" y="1501.0" />
+      <point x="1148.45796957672" y="815.0" />
+      <point x="1475.015754913077" y="815.0" />
+      <point x="-104.80000000000001" y="224.5" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.M_TYPE">
+      <point x="-74.625" y="-304.0" />
+      <point x="450.2610851284961" y="3200.0" />
+      <point x="54.47499999999968" y="3200.0" />
+      <point x="54.47499999999968" y="815.0" />
+      <point x="132.8788029100532" y="815.0" />
+      <point x="-74.40000000000009" y="62.5" />
+    </edge>
+    <edge source="ghost.Ghost" target="ghost.Ghost_type">
+      <point x="-98.4375" y="-362.0" />
+      <point x="541.8374999999999" y="1461.0" />
+      <point x="477.0999999999999" y="1461.0" />
+      <point x="41.40000000000009" y="97.0" />
+    </edge>
+    <edge source="ghost.MapGridTest" target="ghost.App">
+      <point x="-72.0" y="-223.5" />
+      <point x="1724.9268589380197" y="3060.0" />
+      <point x="1484.267559523809" y="3060.0" />
+      <point x="91.875" y="327.5" />
+    </edge>
+    <edge source="ghost.Waka" target="ghost.Direction">
+      <point x="-151.71428571428578" y="-293.0" />
+      <point x="1220.1482686130018" y="775.0" />
+      <point x="908.3376204648532" y="775.0" />
+      <point x="48.5" y="97.0" />
+    </edge>
+    <edge source="ghost.GhostTest" target="ghost.Ghost_type">
+      <point x="-44.77500000000009" y="-304.0" />
+      <point x="480.11108512849603" y="3170.0" />
+      <point x="370.98608512849603" y="3170.0" />
+      <point x="370.98608512849603" y="1511.0" />
+      <point x="352.89999999999986" y="1511.0" />
+      <point x="-82.79999999999995" y="97.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.40024783147459725" x="771.0" y="787.0" />
+  <SelectedNodes>
+    <node>ghost.GhostTest</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
