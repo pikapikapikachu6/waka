@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ghost.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Milestone</a> &gt; <a href="index.source.html" class="el_package">ghost</a> &gt; <span class="el_source">Ghost.java</span></div><h1>Ghost.java</h1><pre class="source lang-java linenums">package ghost;
+
+import processing.core.PImage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static ghost.Ghost_type.Die;
+
+/**
+ * Stored all the ghost types
+ */
+<span class="fc" id="L13">enum Ghost_type {</span>
+<span class="fc" id="L14">    Amubusher,</span>
+<span class="fc" id="L15">    Chaser,</span>
+<span class="fc" id="L16">    Ignorant,</span>
+<span class="fc" id="L17">    Whim,</span>
+<span class="fc" id="L18">    Die</span>
+}
+
+/**
+ * This class used to create ghost object. It includes function of creating a ghost, moving the ghost and drawing the ghost.
+ * @author Shutong Li
+ * @version 1.1
+ */
+
+public class Ghost {
+    private static final int OFFSET = 8;
+    private static final int GRIDSIZE = 16;
+    public static final int WIDTH = 448;
+    public static final int HEIGHT = 576;
+<span class="fc" id="L32">    private static final Point TOPRIGHT = new Point(448,0);</span>
+<span class="fc" id="L33">    private static final Point TOPLEFT = new Point(0,0);</span>
+<span class="fc" id="L34">    private static final Point BOTTOMRIGHT = new Point(448,576);</span>
+<span class="fc" id="L35">    private static final Point BOTTOMLEFT = new Point(0,576);</span>
+    private PImage[] ghosts;
+    public Point start_position;
+    public Point current_position;
+    public Point target;
+    public int speed;
+    public Direction direction;
+<span class="fc" id="L42">    public List&lt;Modes&gt; modes = new ArrayList&lt;Modes&gt;();</span>
+    public Ghost_type ghost_type;
+    private MapGrid mapGrid;
+    public int left_frient;
+    public int frient_time;
+
+    /**
+     * Class Ghost constructor method. Used to create a Ghost class.
+     * @param ghosts PImage[]
+     * @param ghost_type Ghost_type
+     */
+<span class="fc" id="L53">    public Ghost(PImage[] ghosts, Ghost_type ghost_type) {</span>
+<span class="fc" id="L54">        this.ghost_type = ghost_type;</span>
+<span class="fc" id="L55">        this.ghosts = ghosts;</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * This method used to initialize the ghost class and update the original state.
+     * @param point_ghost Poing
+     * @param con_file ConfigProcessing
+     * @param mapGrid MapGrid
+     */
+    public void initialLoc(Point point_ghost, ConfigProcessing con_file, MapGrid mapGrid) {
+<span class="fc" id="L65">        this.mapGrid = mapGrid;</span>
+<span class="fc" id="L66">        this.start_position = point_ghost;</span>
+<span class="fc" id="L67">        this.current_position = point_ghost;</span>
+<span class="fc" id="L68">        this.speed = con_file.getSpeed();</span>
+<span class="fc" id="L69">        this.modes = importModes(con_file.getIterators());</span>
+<span class="fc" id="L70">        this.frient_time = con_file.getFrightenedLength();</span>
+<span class="fc" id="L71">        this.left_frient = con_file.getFrightenedLength();</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * This method used to import Mode list into ghost class.
+     * @param iterators List
+     * @return this.modes List
+     */
+    public List&lt;Modes&gt; importModes(List&lt;Integer&gt; iterators) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (int i = 0; i &lt; iterators.size(); i ++) {</span>
+<span class="fc" id="L81">            int now = iterators.get(i);</span>
+            M_TYPE current_type;
+<span class="fc bfc" id="L83" title="All 2 branches covered.">            if (i % 2 == 0) {</span>
+<span class="fc" id="L84">                current_type = M_TYPE.SCATTER;</span>
+            } else {
+<span class="fc" id="L86">                current_type = M_TYPE.CHASE;</span>
+            }
+<span class="fc" id="L88">            Modes new_mode = new Modes(current_type, now);</span>
+<span class="fc" id="L89">            this.modes.add(new_mode);</span>
+        }
+<span class="fc" id="L91">        return this.modes;</span>
+    }
+
+    /**
+     * This method used to updata the mode list.
+     * @param modes List
+     * @return this.modes List
+     */
+    public List&lt;Modes&gt; updateList(List&lt;Modes&gt; modes) {
+<span class="fc" id="L100">        Modes current = modes.get(0);</span>
+<span class="fc" id="L101">        current.leftTime -= 1;</span>
+<span class="fc" id="L102">        int length = modes.size();</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (current.leftTime &lt;= 0) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            for (int i = 0; i &lt; length - 1; i ++) {</span>
+<span class="fc" id="L105">                modes.set(i, modes.get(i + 1));</span>
+            }
+<span class="fc" id="L107">            modes.set(length - 1, current);</span>
+        }
+<span class="fc" id="L109">        return this.modes;</span>
+    }
+
+    /**
+     * This method used to check in the given direction, the ghost whethercan move or not.
+     * @param current_position Point
+     * @param speed int
+     * @param direction Direction
+     * @param mapGrid MapGrid
+     * @return true/false boolean
+     */
+    public boolean canMove(Point current_position, int speed, Direction direction, MapGrid mapGrid) {
+<span class="fc" id="L121">        float next_x = current_position.getX(); // lie</span>
+<span class="fc" id="L122">        float next_y = current_position.getY(); // hang</span>
+
+<span class="fc bfc" id="L124" title="All 5 branches covered.">        switch (direction) {</span>
+            case RIGHT:
+<span class="fc" id="L126">                next_x = next_x + 16;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">                if (next_x &gt; 448) return false;</span>
+<span class="fc bfc" id="L128" title="All 4 branches covered.">                    else return next_x &lt; 448 &amp;&amp; !mapGrid.isGeneral((int)next_x/GRIDSIZE,(int)next_y/GRIDSIZE);</span>
+            case LEFT:
+<span class="fc" id="L130">                next_x = next_x - 16 ;</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">                if (next_x &lt; 0) return false;</span>
+<span class="fc bfc" id="L132" title="All 4 branches covered.">                    else return next_x &gt; 0 &amp;&amp; !mapGrid.isGeneral((int)next_x/GRIDSIZE,(int)next_y/GRIDSIZE);</span>
+            case UP:
+<span class="fc" id="L134">                next_y = next_y - 16 ;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">                if (next_y &lt; 0) return false;</span>
+<span class="fc bfc" id="L136" title="All 4 branches covered.">                    else return next_y &gt; 0 &amp;&amp; !mapGrid.isGeneral((int)next_x/GRIDSIZE,(int)next_y/GRIDSIZE);</span>
+            case DOWN:
+<span class="fc" id="L138">                next_y = next_y + 16;</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                if (next_y &gt; 576) return false;</span>
+<span class="fc bfc" id="L140" title="All 4 branches covered.">                    else return next_y &lt; 576 &amp;&amp; !mapGrid.isGeneral((int)next_x/GRIDSIZE,(int)next_y/GRIDSIZE);</span>
+        }
+<span class="fc" id="L142">        return false;</span>
+    }
+
+    /**
+     * This method is used to check the current position whether is a intersection or not.
+     * @param direction Direction
+     * @param LeftTurn boolean
+     * @param RightTurn boolean
+     * @param UpTurn boolean
+     * @param DownTurn boolean
+     * @return true/false boolean
+     */
+    public boolean Intersection(Direction direction, boolean LeftTurn, boolean RightTurn, boolean UpTurn, boolean DownTurn) {
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (this.current_position.getX() % 16 != 0) return false;</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        if (this.current_position.getY() % 16 != 0) return false;</span>
+<span class="fc bfc" id="L157" title="All 5 branches covered.">        switch (direction) {</span>
+            case DOWN:
+<span class="fc bfc" id="L159" title="All 2 branches covered.">                if (LeftTurn) return true;</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">                if (RightTurn) return true;</span>
+                break;
+            case UP:
+<span class="fc bfc" id="L163" title="All 2 branches covered.">                if (LeftTurn) return true;</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">                if (RightTurn) return true;</span>
+                break;
+            case LEFT:
+<span class="fc bfc" id="L167" title="All 2 branches covered.">                if (UpTurn) return true;</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                if (DownTurn) return true;</span>
+                break;
+            case RIGHT:
+<span class="fc bfc" id="L171" title="All 2 branches covered.">                if (UpTurn) return true;</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">                if (DownTurn) return true;</span>
+                break;
+        }
+<span class="fc" id="L175">        return false;</span>
+    }
+
+    /**
+     * This method is used to find current target of this.ghost.
+     * @param waka Waka
+     * @param modes Node
+     * @param ghosts List
+     * @param cur_ghost Ghost
+     * @return this.target Point
+     */
+    public Point FindTarget(Waka waka, Modes modes, List&lt;Ghost&gt;ghosts, Ghost cur_ghost) {
+<span class="fc" id="L187">            Point result = waka.current_position;</span>
+<span class="fc" id="L188">            Ghost_type cur_type = cur_ghost.ghost_type;</span>
+<span class="pc bpc" id="L189" title="1 of 3 branches missed.">            switch (modes.current_type) {</span>
+                case SCATTER:
+<span class="fc bfc" id="L191" title="All 5 branches covered.">                    switch (cur_type) {</span>
+                        case Amubusher:
+<span class="fc" id="L193">                            result = TOPRIGHT;</span>
+<span class="fc" id="L194">                            break;</span>
+                        case Chaser:
+<span class="fc" id="L196">                            result = TOPLEFT;</span>
+<span class="fc" id="L197">                            break;</span>
+                        case Ignorant:
+<span class="fc" id="L199">                            result = BOTTOMLEFT;</span>
+<span class="fc" id="L200">                            break;</span>
+                        case Whim:
+<span class="fc" id="L202">                            result = BOTTOMRIGHT;</span>
+                            break;
+                    }
+<span class="fc" id="L205">                    break;</span>
+                case CHASE:
+<span class="fc bfc" id="L207" title="All 5 branches covered.">                    switch (cur_type) {</span>
+                        case Amubusher:
+<span class="fc" id="L209">                            Direction waka_dir = waka.direction;</span>
+<span class="fc" id="L210">                            Point waka_poi = waka.current_position;</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">                            if (waka_dir == Direction.UP) result = new Point(waka_poi.getX(), waka_poi.getY() - 4);</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">                            if (waka_dir == Direction.DOWN) result = new Point(waka_poi.getX(), waka_poi.getY() + 4);</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">                            if (waka_dir == Direction.LEFT) result = new Point(waka_poi.getX() - 4, waka_poi.getY());</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">                            if (waka_dir == Direction.RIGHT) result = new Point(waka_poi.getX() + 4, waka_poi.getY());</span>
+                            break;
+                        case Chaser:
+<span class="fc" id="L217">                            result = waka.current_position;</span>
+<span class="fc" id="L218">                            break;</span>
+                        case Ignorant:
+<span class="fc" id="L220">                            float cur_dis = current_position.Distance(cur_ghost.current_position, waka.current_position);</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">                            if (cur_dis &gt; 8) result = waka.current_position;</span>
+<span class="fc" id="L222">                            else result = BOTTOMLEFT;</span>
+<span class="fc" id="L223">                            break;</span>
+                        case Whim:
+<span class="fc" id="L225">                            Direction w_dir = waka.direction;</span>
+<span class="fc" id="L226">                            Point w_poi = waka.current_position;</span>
+<span class="fc" id="L227">                            Point chaser_cur = new Point(0, 0);</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">                            for (int i = 0; i &lt; ghosts.size(); i++) {</span>
+<span class="fc" id="L229">                                Ghost cur = ghosts.get(i);</span>
+<span class="fc" id="L230">                                Ghost_type ty = cur.ghost_type;</span>
+<span class="fc bfc" id="L231" title="All 2 branches covered.">                                if (ty == Ghost_type.Chaser) {</span>
+<span class="fc" id="L232">                                    chaser_cur = cur.current_position;</span>
+                                }
+                            }
+<span class="fc bfc" id="L235" title="All 2 branches covered.">                            if (w_dir == Direction.UP) w_poi = new Point(2 * w_poi.getX(), 2 * (w_poi.getY() - 2));</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">                            if (w_dir == Direction.DOWN) w_poi = new Point(2 * w_poi.getX(), 2 * (w_poi.getY() + 2));</span>
+<span class="fc bfc" id="L237" title="All 2 branches covered.">                            if (w_dir == Direction.LEFT) w_poi = new Point(2 * (w_poi.getX() - 2), 2 * w_poi.getY());</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">                            if (w_dir == Direction.RIGHT) w_poi = new Point(2 * (w_poi.getX() + 2), 2 * w_poi.getY());</span>
+<span class="fc" id="L239">                            result = new Point(w_poi.getX() - chaser_cur.getX(), w_poi.getY() - chaser_cur.getY());</span>
+                            break;
+                    }
+                    break;
+            }
+<span class="fc" id="L244">            return result;</span>
+        }
+
+    /**
+     * This method used to find the newest direction of this ghost.
+     * @param ghost Pont
+     * @param target Point
+     * @param direction Direction
+     * @return this.direction Direction
+     */
+    public Direction new_direction(Point ghost, Point target, Direction direction) {
+            // up down left right
+<span class="fc" id="L256">            Direction result = direction;</span>
+<span class="fc" id="L257">            double distance[] = new double[4];</span>
+
+<span class="fc" id="L259">            distance[0] = ghost.Distance(new Point(ghost.getX(),ghost.getY()-speed),target);</span>
+<span class="fc" id="L260">            distance[1] = ghost.Distance(new Point(ghost.getX(),ghost.getY()+speed),target);</span>
+<span class="fc" id="L261">            distance[2] = ghost.Distance(new Point(ghost.getX()-speed,ghost.getY()),target);</span>
+<span class="fc" id="L262">            distance[3] = ghost.Distance(new Point(ghost.getX()+speed,ghost.getY()),target);</span>
+
+<span class="fc bfc" id="L264" title="All 2 branches covered.">            if (direction == Direction.UP) distance[1] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L265" title="All 2 branches covered.">            if (direction == Direction.DOWN) distance[0] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">            if (direction == Direction.LEFT) distance[3] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">            if (direction == Direction.RIGHT) distance[2] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">            if (canMove(ghost,this.speed,Direction.UP,this.mapGrid) == false) distance[0] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L269" title="All 2 branches covered.">            if (canMove(ghost,this.speed,Direction.DOWN,this.mapGrid) == false) distance[1] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L270" title="All 2 branches covered.">            if (canMove(ghost,this.speed,Direction.LEFT,this.mapGrid) == false) distance[2] = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L271" title="All 2 branches covered.">            if (canMove(ghost,this.speed,Direction.RIGHT,this.mapGrid) == false) distance[3] = Integer.MAX_VALUE;</span>
+<span class="fc" id="L272">            double min_value = Integer.MAX_VALUE;</span>
+
+<span class="fc bfc" id="L274" title="All 2 branches covered.">            for (int i = 0; i &lt; 4; i ++) { ;</span>
+<span class="fc bfc" id="L275" title="All 2 branches covered.">                if (distance[i] &lt; min_value) {</span>
+<span class="fc" id="L276">                    min_value = distance[i];</span>
+<span class="pc bpc" id="L277" title="1 of 5 branches missed.">                    switch (i) {</span>
+                        case 0:
+<span class="fc" id="L279">                            result = Direction.UP;</span>
+<span class="fc" id="L280">                            break;</span>
+                        case 1:
+<span class="fc" id="L282">                            result = Direction.DOWN;</span>
+<span class="fc" id="L283">                            break;</span>
+                        case 2:
+<span class="fc" id="L285">                            result = Direction.LEFT;</span>
+<span class="fc" id="L286">                            break;</span>
+                        case 3:
+<span class="fc" id="L288">                            result = Direction.RIGHT;</span>
+                            break;
+                    }
+                }
+            }
+<span class="fc" id="L293">            this.direction = result;</span>
+<span class="fc" id="L294">            return result;</span>
+        }
+
+    /**
+     * This method used to move ghost.
+     * @param waka Waka
+     * @param ghosts List
+     */
+    public void move(Waka waka, List&lt;Ghost&gt; ghosts) {
+<span class="fc" id="L303">        boolean turn_UP = canMove(this.current_position, this.speed, Direction.UP,  this.mapGrid);</span>
+<span class="fc" id="L304">        boolean turn_DOWN = canMove(this.current_position, this.speed, Direction.DOWN,  this.mapGrid);</span>
+<span class="fc" id="L305">        boolean turn_LEFT = canMove(this.current_position, this.speed, Direction.LEFT,  this.mapGrid);</span>
+<span class="fc" id="L306">        boolean turn_RIGHT = canMove(this.current_position, this.speed, Direction.RIGHT,  this.mapGrid);</span>
+
+        boolean is_inter;
+<span class="fc bfc" id="L309" title="All 2 branches covered.">        if (this.direction == null) is_inter = true;</span>
+<span class="fc" id="L310">            else  is_inter = Intersection(this.direction, turn_LEFT, turn_RIGHT, turn_UP, turn_DOWN);</span>
+
+<span class="fc bfc" id="L312" title="All 2 branches covered.">        if (is_inter == true) {</span>
+
+<span class="fc bfc" id="L314" title="All 2 branches covered.">            if (waka.friented == true) {</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">                if (left_frient &gt; 2) left_frient -= 1;</span>
+                    else {
+<span class="fc" id="L317">                        left_frient = frient_time;</span>
+<span class="fc" id="L318">                        waka.friented = false;</span>
+                }
+<span class="fc" id="L320">                final long l = System.currentTimeMillis();</span>
+<span class="fc" id="L321">                final int i = (int)( l % 4 );</span>
+<span class="pc bpc" id="L322" title="4 of 5 branches missed.">                switch (i) {</span>
+                    case 0:
+<span class="nc bnc" id="L324" title="All 4 branches missed.">                        if (this.direction != Direction.DOWN &amp;&amp; turn_UP == true) this.direction = Direction.UP;</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">                            else if (turn_DOWN) this.direction = Direction.DOWN;</span>
+<span class="nc bnc" id="L326" title="All 2 branches missed.">                                else if (turn_LEFT) this.direction = Direction.LEFT;</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">                                    else if (turn_RIGHT) this.direction = Direction.RIGHT;</span>
+<span class="nc" id="L328">                                        else this.direction = Direction.UP;</span>
+<span class="nc" id="L329">                        break;</span>
+                    case 1:
+<span class="nc bnc" id="L331" title="All 4 branches missed.">                        if (this.direction != Direction.UP &amp;&amp; turn_DOWN == true) this.direction = Direction.DOWN;</span>
+<span class="nc bnc" id="L332" title="All 2 branches missed.">                            else if (turn_UP) this.direction = Direction.UP;</span>
+<span class="nc bnc" id="L333" title="All 2 branches missed.">                                else if (turn_LEFT) this.direction = Direction.LEFT;</span>
+<span class="nc bnc" id="L334" title="All 2 branches missed.">                                    else if (turn_RIGHT) this.direction = Direction.RIGHT;</span>
+<span class="nc" id="L335">                                        else this.direction = Direction.DOWN;</span>
+<span class="nc" id="L336">                        break;</span>
+                    case 2:
+<span class="pc bpc" id="L338" title="2 of 4 branches missed.">                        if (this.direction != Direction.RIGHT &amp;&amp; turn_LEFT == true) this.direction = Direction.LEFT;</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">                            else if (turn_RIGHT) this.direction = Direction.RIGHT;</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">                                else if (turn_UP) this.direction = Direction.UP;</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">                                    else if (turn_DOWN) this.direction = Direction.DOWN;</span>
+<span class="nc" id="L342">                                        else this.direction = Direction.LEFT;</span>
+<span class="nc" id="L343">                        break;</span>
+                    case 3:
+<span class="nc bnc" id="L345" title="All 4 branches missed.">                        if (this.direction != Direction.LEFT &amp;&amp; turn_RIGHT == true) this.direction = Direction.RIGHT;</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">                            else if (turn_LEFT) this.direction = Direction.LEFT;</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">                                else if (turn_UP) this.direction = Direction.UP;</span>
+<span class="nc bnc" id="L348" title="All 2 branches missed.">                                    else if (turn_DOWN) this.direction = Direction.DOWN;</span>
+<span class="nc" id="L349">                                        else this.direction = Direction.RIGHT;</span>
+                        break;
+                }
+<span class="fc" id="L352">            } else {</span>
+<span class="fc" id="L353">                Point cur_target = FindTarget(waka, this.modes.get(0), ghosts, this);</span>
+<span class="fc" id="L354">                this.direction = new_direction(this.current_position, cur_target, this.direction);</span>
+<span class="fc" id="L355">                this.target = cur_target;</span>
+            }
+        }
+<span class="pc bpc" id="L358" title="1 of 5 branches missed.">        switch (this.direction) {</span>
+            case RIGHT:
+<span class="fc" id="L360">                this.current_position = new Point(current_position.getX()+this.speed,current_position.getY());</span>
+<span class="fc" id="L361">                break;</span>
+            case LEFT:
+<span class="fc" id="L363">                this.current_position = new Point(current_position.getX()-this.speed,current_position.getY());</span>
+<span class="fc" id="L364">                break;</span>
+            case UP:
+<span class="fc" id="L366">                this.current_position = new Point(current_position.getX(),current_position.getY()-this.speed);</span>
+<span class="fc" id="L367">                break;</span>
+            case DOWN:
+<span class="fc" id="L369">                this.current_position = new Point(current_position.getX(),current_position.getY()+this.speed);</span>
+                break;
+        }
+<span class="fc" id="L372">    }</span>
+
+    /**
+     * This method is used to draw ghost on the map.
+     * @param app App
+     * @param waka Waka
+     */
+    public void draw(App app,Waka waka) {
+<span class="pc bpc" id="L380" title="1 of 2 branches missed.">        if (waka.friented == true) {</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">            if (this.ghost_type != Die) {</span>
+<span class="nc" id="L382">                app.image(ghosts[4], this.current_position.getX() - OFFSET, current_position.getY() - OFFSET);</span>
+            }
+        } else {
+<span class="pc bpc" id="L385" title="1 of 5 branches missed.">            switch (this.ghost_type) {</span>
+                case Whim:
+<span class="fc" id="L387">                    app.image(ghosts[3], this.current_position.getX() - OFFSET, current_position.getY() - OFFSET);</span>
+<span class="fc" id="L388">                    break;</span>
+                case Ignorant:
+<span class="fc" id="L390">                    app.image(ghosts[2], this.current_position.getX() - OFFSET, current_position.getY() - OFFSET);</span>
+<span class="fc" id="L391">                    break;</span>
+                case Chaser:
+<span class="fc" id="L393">                    app.image(ghosts[1], this.current_position.getX() - OFFSET, current_position.getY() - OFFSET);</span>
+<span class="fc" id="L394">                    break;</span>
+                case Amubusher:
+<span class="fc" id="L396">                    app.image(ghosts[0], this.current_position.getX() - OFFSET, current_position.getY() - OFFSET);</span>
+                    break;
+            }
+        }
+<span class="fc" id="L400">        updateList(this.modes);</span>
+<span class="fc" id="L401">    }</span>
+
+    /**
+     * This method used to check whether the ghost eat the waka.
+     * @param waka Waka
+     * @param ghost Ghpst
+     * @return true/false boolean
+     */
+    public boolean eat_waka(Waka waka, Ghost ghost) {
+<span class="fc bfc" id="L410" title="All 2 branches covered.">        if (ghost.ghost_type == Die) return false;</span>
+<span class="fc bfc" id="L411" title="All 2 branches covered.">        if ((int) waka.current_position.getX() / 16 == (int) ghost.current_position.getX() / 16) {</span>
+<span class="fc bfc" id="L412" title="All 2 branches covered.">            if ((int) waka.current_position.getY() / 16 == (int) ghost.current_position.getY() / 16) {</span>
+<span class="fc bfc" id="L413" title="All 2 branches covered.">                if (waka.friented == false) {</span>
+<span class="fc" id="L414">                    waka.start_game();</span>
+<span class="fc" id="L415">                    return true;</span>
+                } else {
+<span class="fc" id="L417">                    this.ghost_type = Die;</span>
+                }
+            }
+        }
+<span class="fc" id="L421">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Point.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Milestone</a> &gt; <a href="index.source.html" class="el_package">ghost</a> &gt; <span class="el_source">Point.java</span></div><h1>Point.java</h1><pre class="source lang-java linenums">package ghost;
+
+/**
+ * Used to represent the direction: LEFT, RIGHT, UP, DOWN
+ */
+<span class="fc" id="L6">enum Direction {</span>
+<span class="fc" id="L7">    LEFT,</span>
+<span class="fc" id="L8">    RIGHT,</span>
+<span class="fc" id="L9">    UP,</span>
+<span class="fc" id="L10">    DOWN,</span>
+<span class="fc" id="L11">    NODIR</span>
+}
+
+/**
+ * This class used to create Point object and can test the distance between two points.
+ * @author Shutong Li
+ * @version 1.1
+ */
+public class Point {
+    float x;
+    float y;
+
+    /**
+     * This is class Point constructor method.
+     * @param x float
+     * @param y float
+     */
+<span class="fc" id="L28">    public Point(float x, float y) {</span>
+<span class="fc" id="L29">        this.x = x;</span>
+<span class="fc" id="L30">        this.y = y;</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * This method is used to get point x-axis value.
+     * @return x float
+     */
+    public float getX() {
+<span class="fc" id="L38">        return x;</span>
+    }
+
+    /**
+     * This method is used to get point y-axis value.
+     * @return y float
+     */
+    public float getY() {
+<span class="fc" id="L46">        return y;</span>
+    }
+
+    /**
+     * This method is used to test the distance between two point.
+     * @param x float
+     * @param y float
+     * @return distance float
+     */
+    public float Distance(Point x, Point y) {
+<span class="fc" id="L56">        float x_x = x.getX();</span>
+<span class="fc" id="L57">        float x_y = x.getY();</span>
+<span class="fc" id="L58">        float y_x = y.getX();</span>
+<span class="fc" id="L59">        float y_y = y.getY();</span>
+<span class="fc" id="L60">        double result = Math.sqrt(Math.pow(x_x - y_x, 2) + Math.pow(x_y - y_y, 2));</span>
+<span class="fc" id="L61">        return (float)result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Waka.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Milestone</a> &gt; <a href="index.source.html" class="el_package">ghost</a> &gt; <span class="el_source">Waka.java</span></div><h1>Waka.java</h1><pre class="source lang-java linenums">package ghost;
+
+import processing.core.PImage;
+
+import static ghost.Direction.*;
+
+/**
+ * This class is used to create a object waka.This class used to create ghost object. It includes function of creating
+ * a waka, moving the ghost and drawing the waka.
+ * @author Shutong Li
+ * @version 1.1
+ */
+public class Waka{
+    private static final int GRIDSIZE = 16;
+    private static final int OFFSET = 8;
+
+    private int speed;
+    public int lives;
+    private PImage[] wakas;
+    private PImage close_waka;
+    private MapGrid mapGrid;
+    public Point current_position;
+    public Point start_position;
+<span class="fc" id="L24">    public Direction direction = UP;</span>
+<span class="fc" id="L25">    public int mark = 0;</span>
+    public int total_fruit;
+    public boolean friented;
+
+    /**
+     * This method is waka class constructor method.
+     * @param speed int
+     * @param lives int
+     * @param wakas PImage[]
+     * @param close_waka PImage
+     */
+<span class="fc" id="L36">    public Waka(int speed, int lives, PImage[] wakas, PImage close_waka) {</span>
+<span class="fc" id="L37">        this.speed = speed;</span>
+<span class="fc" id="L38">        this.lives = lives;</span>
+<span class="fc" id="L39">        this.wakas = wakas;</span>
+<span class="fc" id="L40">        this.close_waka = close_waka;</span>
+<span class="fc" id="L41">        this.mark = 0;</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * This method is used to set the waka into original state.
+     * @param mapGrid MapGrid
+     */
+    public void initialLoc(MapGrid mapGrid) {
+<span class="fc" id="L49">        this.mapGrid = mapGrid;</span>
+        //x = 20 y = 13
+        // x hang y lie
+<span class="fc" id="L52">        this.start_position = new Point(mapGrid.getStart_waka().getX(),mapGrid.getStart_waka().getY());</span>
+<span class="fc" id="L53">        this.current_position = new Point(mapGrid.getStart_waka().getX(),mapGrid.getStart_waka().getY());</span>
+<span class="fc" id="L54">        this.total_fruit = mapGrid.total_fruit;</span>
+<span class="fc" id="L55">        this.friented = false;</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * This method is used to change the waka dierction with LEFT.
+     */
+    public void setDirToLeft() {
+<span class="fc" id="L62">        this.direction = LEFT;</span>
+<span class="fc" id="L63">        move();</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * This method is used to change the waka dierction with RIGHT.
+     */
+    public void setDirToRight() {
+<span class="fc" id="L70">        this.direction = RIGHT;</span>
+<span class="fc" id="L71">        move();</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * This method is used to change the waka dierction with UP.
+     */
+    public void setDirToUp() {
+<span class="fc" id="L78">        this.direction = UP;</span>
+<span class="fc" id="L79">        move();</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * This method is used to change the waka dierction with DOWN.
+     */
+    public void setDirToDown() {
+<span class="fc" id="L86">        this.direction = DOWN;</span>
+<span class="fc" id="L87">        move();</span>
+<span class="fc" id="L88">    }</span>
+
+    /**
+     * This method is used to move the waka.
+     */
+    public void move() {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (canMove(this.current_position, this.speed, this.lives, this.direction, this.mapGrid)) {</span>
+<span class="pc bpc" id="L95" title="1 of 5 branches missed.">            switch (this.direction) {</span>
+                case UP:
+<span class="fc" id="L97">                    this.current_position.y -= this.speed;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">                    if (eat(this.mapGrid, this.current_position) == 1) mark += 1;</span>
+                    break;
+                case DOWN:
+<span class="fc" id="L101">                    this.current_position.y += this.speed;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">                    if (eat(this.mapGrid, this.current_position) == 1) mark += 1;</span>
+                    break;
+                case LEFT:
+<span class="fc" id="L105">                    this.current_position.x -= this.speed;</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">                    if (eat(this.mapGrid, this.current_position) == 1) mark += 1;</span>
+                    break;
+                case RIGHT:
+<span class="fc" id="L109">                    this.current_position.x += this.speed;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                    if (eat(this.mapGrid, this.current_position) == 1) mark += 1;</span>
+                    break;
+            }
+        }
+<span class="fc" id="L114">    }</span>
+
+    /**
+     * This method is used to check which direction the waka can move.
+     * @param current_position Point
+     * @param speed int
+     * @param lives int
+     * @param direction Direction
+     * @param mapGrid MapGrid
+     * @return true/false boolean
+     */
+    public boolean canMove(Point current_position, int speed, int lives, Direction direction, MapGrid mapGrid) {
+<span class="fc" id="L126">        float next_x = current_position.getX();</span>
+<span class="fc" id="L127">        float next_y = current_position.getY();</span>
+<span class="fc bfc" id="L128" title="All 5 branches covered.">        switch (direction) {</span>
+            case RIGHT:
+<span class="fc" id="L130">                next_x = next_x + speed + OFFSET;</span>
+<span class="fc bfc" id="L131" title="All 4 branches covered.">                if (current_position.getX() &lt; App.WIDTH &amp;&amp; next_x &lt;= App.WIDTH) {</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">                    return !mapGrid.isGeneral((int) next_x / GRIDSIZE, (int) next_y / GRIDSIZE);</span>
+                }
+                break;
+            case LEFT:
+<span class="fc" id="L136">                next_x = next_x - speed - OFFSET;</span>
+<span class="fc bfc" id="L137" title="All 4 branches covered.">                if (current_position.getX() &gt; 0 &amp;&amp; next_x &gt;= 0) {</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">                    return !mapGrid.isGeneral((int) next_x / GRIDSIZE, (int) next_y / GRIDSIZE);</span>
+                }
+                break;
+            case UP:
+<span class="fc" id="L142">                next_y = next_y - speed - OFFSET;</span>
+<span class="fc bfc" id="L143" title="All 4 branches covered.">                if (current_position.getY() &gt; 0 &amp;&amp; next_y &gt;= 0) {</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">                    return !mapGrid.isGeneral((int) next_x / GRIDSIZE, (int) next_y / GRIDSIZE);</span>
+                }
+                break;
+            case DOWN:
+<span class="fc" id="L148">                next_y = next_y + speed + OFFSET;</span>
+<span class="fc bfc" id="L149" title="All 4 branches covered.">                if (current_position.getY() &lt; App.HEIGHT &amp;&amp; next_y &lt;= App.HEIGHT) {</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                    return !mapGrid.isGeneral((int) next_x / GRIDSIZE, (int) next_y / GRIDSIZE);</span>
+                }
+                break;
+        }
+<span class="fc" id="L154">        return false;</span>
+    }
+
+    /**
+     * This method is used to test the waka whether eat a fruit in the current position.
+     * @param mapGrid MapGrid
+     * @param current_position Point
+     * @return 0/1 int
+     *  0: not eat
+     *  1: eat
+     */
+    public int eat(MapGrid mapGrid, Point current_position) {
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (mapGrid.getMap_grid_char((int)current_position.getY()/GRIDSIZE, (int)current_position.getX()/GRIDSIZE) == '7') {</span>
+<span class="fc" id="L167">            mapGrid.setMap_grid_char((int)current_position.getY()/GRIDSIZE, (int)current_position.getX()/GRIDSIZE);</span>
+<span class="fc" id="L168">            return 1;</span>
+        }
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (mapGrid.getMap_grid_char((int)current_position.getY()/GRIDSIZE, (int)current_position.getX()/GRIDSIZE) == '8') {</span>
+<span class="fc" id="L171">            mapGrid.setMap_grid_char((int)current_position.getY()/GRIDSIZE, (int)current_position.getX()/GRIDSIZE);</span>
+<span class="fc" id="L172">            this.friented = true;</span>
+<span class="fc" id="L173">            return 1;</span>
+        }
+<span class="fc" id="L175">        return 0;</span>
+    }
+
+    /**
+     * Ater the waka died, this method is set the waka to the original state.
+     */
+    public void start_game() {
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (this.lives &gt; 0) {</span>
+<span class="fc" id="L183">            this.lives -= 1;</span>
+<span class="fc" id="L184">            this.current_position = new Point(this.start_position.getX(),this.start_position.getY());</span>
+        }
+<span class="fc" id="L186">    }</span>
+
+    /**
+     * This method is used to draw waka on the map and show.
+     * @param app App
+     * @return true/false boolean
+     */
+    public boolean draw(App app) {
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (app.current_time % 16 &lt; 8) {</span>
+<span class="pc bpc" id="L195" title="4 of 5 branches missed.">            switch (this.direction) {</span>
+                case LEFT:
+<span class="nc" id="L197">                    app.image(wakas[0], current_position.getX() - OFFSET,current_position.getY()- OFFSET);</span>
+<span class="nc" id="L198">                    break;</span>
+                case RIGHT:
+<span class="nc" id="L200">                    app.image(wakas[1],current_position.getX() - OFFSET,current_position.getY() - OFFSET);</span>
+<span class="nc" id="L201">                    break;</span>
+                case UP:
+<span class="fc" id="L203">                    app.image(wakas[2], current_position.getX() - OFFSET,current_position.getY()- OFFSET);</span>
+<span class="fc" id="L204">                    break;</span>
+                case DOWN:
+<span class="nc" id="L206">                    app.image(wakas[3], current_position.getX() - OFFSET,current_position.getY() - OFFSET);</span>
+                    break;
+            }
+<span class="fc" id="L209">            return true;</span>
+        } else {
+<span class="pc bpc" id="L211" title="4 of 5 branches missed.">            switch (this.direction) {</span>
+                case LEFT:
+<span class="nc" id="L213">                    app.image(close_waka, current_position.getX()- OFFSET,current_position.getY()- OFFSET);</span>
+<span class="nc" id="L214">                    break;</span>
+                case RIGHT:
+<span class="nc" id="L216">                    app.image(close_waka, current_position.getX() - OFFSET,current_position.getY() - OFFSET);</span>
+<span class="nc" id="L217">                    break;</span>
+                case UP:
+<span class="fc" id="L219">                    app.image(close_waka, current_position.getX()- OFFSET,current_position.getY()- OFFSET);</span>
+<span class="fc" id="L220">                    break;</span>
+                case DOWN:
+<span class="nc" id="L222">                    app.image(close_waka, current_position.getX() - OFFSET,current_position.getY() - OFFSET);</span>
+                    break;
+            }
+<span class="fc" id="L225">            return true;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
