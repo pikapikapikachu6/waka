@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ghost.AppTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2020-11-22T03:19:02" hostname="LAPTOP-FQUAO8L2" time="0.888">
+  <properties/>
+  <testcase name="testSettings()" classname="ghost.AppTest" time="0.47"/>
+  <testcase name="simpleTest()" classname="ghost.AppTest" time="0.083"/>
+  <testcase name="testSetup()" classname="ghost.AppTest" time="0.047"/>
+  <testcase name="testDraw()" classname="ghost.AppTest" time="0.097"/>
+  <testcase name="testMain()" classname="ghost.AppTest" time="0.096"/>
+  <testcase name="testKeyPressed()" classname="ghost.AppTest" time="0.042"/>
+  <testcase name="testRestart()" classname="ghost.AppTest" time="0.05"/>
+  <system-out><![CDATA[map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+]]></system-out>
+  <system-err><![CDATA[java.lang.NullPointerException
+	at ghost.Ghost.canMove(Ghost.java:121)
+	at ghost.Ghost.move(Ghost.java:303)
+	at ghost.App.draw(App.java:117)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
+</testsuite>

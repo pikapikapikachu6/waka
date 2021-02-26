@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ghost.GhostTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-11-22T03:19:03" hostname="LAPTOP-FQUAO8L2" time="0.1">
+  <properties/>
+  <testcase name="testNew_direction()" classname="ghost.GhostTest" time="0.001"/>
+  <testcase name="testDraw()" classname="ghost.GhostTest" time="0.08"/>
+  <testcase name="testMove()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testUpdateList()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testFindTarget()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testEat_waka()" classname="ghost.GhostTest" time="0.001"/>
+  <testcase name="testCanMove()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testInitialLoc()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testImportModes()" classname="ghost.GhostTest" time="0.002"/>
+  <testcase name="testIntersection()" classname="ghost.GhostTest" time="0.002"/>
+  <system-out><![CDATA[map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

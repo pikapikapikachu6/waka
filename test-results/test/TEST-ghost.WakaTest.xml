@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ghost.WakaTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-11-22T03:19:03" hostname="LAPTOP-FQUAO8L2" time="0.016">
+  <properties/>
+  <testcase name="testinitialLoc()" classname="ghost.WakaTest" time="0.002"/>
+  <testcase name="testcanMove()" classname="ghost.WakaTest" time="0.002"/>
+  <testcase name="testeat()" classname="ghost.WakaTest" time="0.001"/>
+  <testcase name="testdraw()" classname="ghost.WakaTest" time="0.002"/>
+  <testcase name="testmove()" classname="ghost.WakaTest" time="0.001"/>
+  <testcase name="testsetDirToRight()" classname="ghost.WakaTest" time="0.002"/>
+  <testcase name="teststart_game()" classname="ghost.WakaTest" time="0.001"/>
+  <testcase name="testsetDirToDown()" classname="ghost.WakaTest" time="0.001"/>
+  <testcase name="testsetDirToLeft()" classname="ghost.WakaTest" time="0.001"/>
+  <testcase name="testsetDirToUp()" classname="ghost.WakaTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

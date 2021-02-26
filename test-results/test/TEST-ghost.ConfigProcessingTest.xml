@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ghost.ConfigProcessingTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-11-22T03:19:03" hostname="LAPTOP-FQUAO8L2" time="0.023">
+  <properties/>
+  <testcase name="getIterators()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="testGetIterator()" classname="ghost.ConfigProcessingTest" time="0.002"/>
+  <testcase name="testGetFrightenedLength()" classname="ghost.ConfigProcessingTest" time="0.0"/>
+  <testcase name="testGetLives()" classname="ghost.ConfigProcessingTest" time="0.0"/>
+  <testcase name="testGetSpeed()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="testGetMap_address()" classname="ghost.ConfigProcessingTest" time="0.003"/>
+  <testcase name="getIterator()" classname="ghost.ConfigProcessingTest" time="0.002"/>
+  <testcase name="testGetIterators()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="getMap_address()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="getFrightenedLength()" classname="ghost.ConfigProcessingTest" time="0.0"/>
+  <testcase name="readJsonFile()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="testReadJsonFile()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="getLives()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <testcase name="getSpeed()" classname="ghost.ConfigProcessingTest" time="0.001"/>
+  <system-out><![CDATA[map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+map.txt
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

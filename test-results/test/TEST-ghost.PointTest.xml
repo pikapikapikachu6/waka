@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ghost.PointTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-11-22T03:19:03" hostname="LAPTOP-FQUAO8L2" time="0.002">
+  <properties/>
+  <testcase name="testgetX()" classname="ghost.PointTest" time="0.0"/>
+  <testcase name="testgetY()" classname="ghost.PointTest" time="0.0"/>
+  <testcase name="testdistance()" classname="ghost.PointTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
